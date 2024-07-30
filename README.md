@@ -1,5 +1,5 @@
 # message_processing-service
 // TODO:
-добавить докер 
-openapi 
+добавить докер,
+openapi,
 залить на сервак
