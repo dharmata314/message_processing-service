@@ -9,6 +9,50 @@
 ```
 87.242.106.218:8080 
 ```
+Доступные следующие запросы к серверу
+Регистрация пользователя:
+```
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"email": "test@email.com", "password": "testPassword"}' \
+    http://87.242.106.218:8080 :8080/users/new
+```
+Авторизация пользователя:
+```
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"email": "test@email.com", "password": "testPassword"}' \
+    http://87.242.106.218:8080 :8080/login
+```
+
+Изменение данных пользователя:
+```
+curl -X PATCH \
+-H "Authorization: Bearer <token>" \
+-H "Content-Type: application/json" \
+-d '{"email": "newEmail@email.com", "password": "NewPassword", "id": 1}' \
+http://87.242.106.218:8080 :8080/users/{id}
+```
+Отправка сообщения:
+```
+curl -X POST \
+-H "Authorization: Bearer <token>" \
+-H "Content-Type: application/json" \
+-d '{"content": "test"}' \
+http://87.242.106.218:8080 :8080/message
+```
+Получение статистика по сообщениям
+```
+curl -X GET \
+-H "Authorization: Bearer <token>" \
+http://87.242.106.218:8080 :8080/message/statistics
+```
+Удаление сообщения из базы данных:
+```
+curl -X DELETE \
+-H "Authorization: Bearer <token>" \
+http://87.242.106.218:8080 :8080/message/{id}
+```
 
 
 ### Запуск приложения локально
@@ -75,7 +119,7 @@ curl -X POST \
 -d '{"content": "test"}' \
 http://localhost:8080/message
 ```
-Получение статистика по сообщения
+Получение статистика по сообщениям
 ```
 curl -X GET \
 -H "Authorization: Bearer <token>" \
