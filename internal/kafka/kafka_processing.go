@@ -40,7 +40,7 @@ func ConsumeMessage(broker, topic string, log *slog.Logger, messageRepo models.M
 	for {
 		msg, err := r.ReadMessage(context.Background())
 		if err != nil {
-			log.Error("error reading message from kafka")
+			log.Error("error reading message from kafka", slog.String("error", err.Error()))
 			errMsg.Err(err)
 			return
 		}

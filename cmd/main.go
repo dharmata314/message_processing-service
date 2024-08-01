@@ -99,7 +99,7 @@ func main() {
 		}
 	}()
 
-	go kafka.ConsumeMessage("localhost:9092", "test", log, messageRepository)
+	go kafka.ConsumeMessage("kafka:9092", "test", log, messageRepository)
 
 	select {}
 

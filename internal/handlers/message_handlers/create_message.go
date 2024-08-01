@@ -55,7 +55,7 @@ func NewMessage(log *slog.Logger, MessageRepository models.MessageRepository) ht
 			return
 		}
 		log.Info("message added to postgres")
-		err = kafka.ProduceMessage("localhost:9092", "test", message, log)
+		err = kafka.ProduceMessage("kafka:9092", "test", message, log)
 		if err != nil {
 			log.Error("failed to send message to kafka", errMsg.Err(err))
 			render.JSON(w, r, response.Error("failed to send message to kafka"))

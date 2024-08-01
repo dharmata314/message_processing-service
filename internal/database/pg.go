@@ -29,6 +29,7 @@ func NewPG(ctx context.Context, connString string, log *slog.Logger, cfg *config
 		db, err = pgxpool.New(ctx, connString)
 
 		if err != nil {
+			log.Error("unable to create connection pool", slog.String("error", err.Error()))
 			err = fmt.Errorf("unable to create connection pool: %w", err)
 			return
 		}
@@ -36,6 +37,7 @@ func NewPG(ctx context.Context, connString string, log *slog.Logger, cfg *config
 		pgInstance = &Postgres{db, log, cfg}
 
 		if err = CreateTable(ctx, db, log, cfg); err != nil {
+			log.Error("failed to create tables", slog.String("error", err.Error()))
 			return
 		}
 	})
@@ -55,6 +57,7 @@ func CreateTable(ctx context.Context, db *pgxpool.Pool, log *slog.Logger, cfg *c
 	created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
 	processed_at TIMESTAMPTZ)`)
 	if err != nil {
+		log.Error("failed to create messages table", slog.String("error", err.Error()))
 		return fmt.Errorf("failed to create mesagges table")
 	}
 
@@ -66,6 +69,7 @@ func CreateTable(ctx context.Context, db *pgxpool.Pool, log *slog.Logger, cfg *c
 	    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP)
 	`)
 	if err != nil {
+		log.Error("failed to create users table", slog.String("error", err.Error()))
 		return fmt.Errorf("failed to create users table: %w", err)
 	}
 
