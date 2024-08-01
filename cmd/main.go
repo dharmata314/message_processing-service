@@ -65,10 +65,6 @@ func main() {
 
 	router.With(func(next http.Handler) http.Handler {
 		return jwt.TokenAuthMiddleware(jwtManager, next)
-	}).Delete("/users/{id}", userhandlers.DeleteUserHandler(log, userRepository)) // не парсит id запроса
-
-	router.With(func(next http.Handler) http.Handler {
-		return jwt.TokenAuthMiddleware(jwtManager, next)
 	}).Patch("/users/{id}", userhandlers.NewUpdateUserHandler(userRepository, log))
 
 	router.With(func(next http.Handler) http.Handler {
