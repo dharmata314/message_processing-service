@@ -87,7 +87,7 @@ http://87.242.106.218:8080/message/{id}
 Для развертывания в Docker Compose создан файл [docker-compose.yml](https://github.com/dharmata314/message_processing-service/blob/main/docker-compose.yml)
 Для запуска приложения необходимо запустить следующую команду из директории проекта
 ```
-docker-compose up --build app
+docker compose up --build app
 ```
 
 
