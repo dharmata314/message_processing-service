@@ -27,60 +27,6 @@ Authorization: Bearer <token>
 Общие настройки приложения содержатся в [конфиге](https://github.com/dharmata314/message_processing-service/tree/main/config). В зависимости от способа развертывания какие-либо параметры могут меняться. 
 В конфиге содержатся основные данные, необходимые для работы приложения.
 
-### Сервис запущен как на публичном сервере, так и может быть развёрнут локально. Сначала указана инструкция по доступу к публичному серверу, затем при локальном запуске
-
-### Доступ к сервису по IP-адресу
-Сервис доступен по адресу
-```
-87.242.106.218:8080 
-```
-Доступные следующие запросы к серверу
-
-Регистрация пользователя:
-```
-curl -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"email": "test@email.com", "password": "testPassword"}' \
-    http://87.242.106.218:8080/users/new
-```
-Авторизация пользователя:
-```
-curl -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"email": "test@email.com", "password": "testPassword"}' \
-    http://87.242.106.218:8080/login
-```
-
-Изменение данных пользователя:
-```
-curl -X PATCH \
--H "Authorization: Bearer <token>" \
--H "Content-Type: application/json" \
--d '{"email": "newEmail@email.com", "password": "NewPassword", "id": 1}' \
-http://87.242.106.218:8080/users/{id}
-```
-Отправка сообщения:
-```
-curl -X POST \
--H "Authorization: Bearer <token>" \
--H "Content-Type: application/json" \
--d '{"content": "test"}' \
-http://87.242.106.218:8080/message
-```
-Получение статистика по сообщениям
-```
-curl -X GET \
--H "Authorization: Bearer <token>" \
-http://87.242.106.218:8080/message/statistics
-```
-Удаление сообщения из базы данных:
-```
-curl -X DELETE \
--H "Authorization: Bearer <token>" \
-http://87.242.106.218:8080/message/{id}
-```
-
-
 ### Запуск приложения локально
 Запуск приложения осуществляется через Docker
 
